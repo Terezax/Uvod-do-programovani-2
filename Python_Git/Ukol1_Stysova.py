@@ -8,7 +8,7 @@ class Locality:
     self.locality_coefficient = locality_coefficient
 
   def __str__(self):
-    return f"{self.name}, koeficient: {self.locality_coefficient}"
+    return f"{self.name}, koeficient: {self.locality_coefficient}."
 
 #Vytvoř třídu Property, která bude reprezentovat nějakou nemovitost. Třída bude mít atribut locality (lokalita, kde se pozemek nachází, bude to objekt třídy Locality).
 
@@ -17,7 +17,7 @@ class Property:
     self.locality = locality
 
   def __str__(self):
-    return f"Nemovitost v lokalite {self.locality}."
+    return f"Nemovitost v lokalite {self.locality}"
 
 kocourkov = Locality("Chlupacov", 2.5)
 #print(kocourkov)
@@ -34,17 +34,17 @@ class Estate(Property):
     return f"{super().__str__()} typu {self.estate_type} a rozlohy {self.area} bude vyse dane KC."
   
   def calculate_tax(self):
-    if self.estate_type == "land":
-      coefficient = 0.85
-    elif self.estate_type == "building site":
-      coefficient = 9
-    elif self.estate_type == "forrest":
-      coefficient = 0.35
-    elif self.estate_type == "garden":
-      coefficient = 2
-    else:
-      return f"Neplatny pozemek"
-
+    type_coefficients = {
+      "land": 0.85,
+      "building site": 9,
+      "forrest": 0.35,
+      "garden": 2
+    }
+    coefficient = type_coefficients.get(self.estate_type, 1)  # Default to 1 if type not found
+    if coefficient is None:
+      raise ValueError(f"Neplatny typ pozemku: {self.estate_type}")  
+    
+    # Vypocet dane z nemovitosti
     sazba_dane = self.area * coefficient * self.locality.locality_coefficient
     return math.ceil(sazba_dane)
 
@@ -59,7 +59,7 @@ class Residence(Property):
     self.commercial = commercial
 
   def __str__(self):
-    return super().__str__()
+    return f"{super().__str__()}, Pozemek v lokalite {self.locality}, o plose {self.area} m2. Je komercni? {self.commercial}"
   
   def calculate_tax(self):
     sazba_dane2 = (self.area * self.locality.locality_coefficient) * 15
