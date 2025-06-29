@@ -80,8 +80,5 @@ print(f"Dan pro dum se rovna {dum.calculate_tax()} Kc.")
 kancelar = Residence(brno, 90, True)
 print(F"Dan za kancelar se rovna {kancelar.calculate_tax()} Kc.")
 
-<<<<<<< HEAD
 #hotove zakladni zadani
-=======
 #hotove zakladni zadani
->>>>>>> f02a811d84274be80fe54ab7c517c535f23460e6
