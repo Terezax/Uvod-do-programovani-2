@@ -49,3 +49,6 @@ if response.status_code == 200:
 
   for item in subjekty:
     print(item.get("obchodniJmeno"), item.get("ico"))
+
+#BONUS
+
